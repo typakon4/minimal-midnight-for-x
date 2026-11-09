@@ -1,12 +1,11 @@
-// Shared by the content script and the popup. Defaults follow Minimal Theme
-// for Twitter, so the extension works the same way out of the box.
+// Shared by the content script and the popup.
 const XM_DEFAULTS = {
-  fontFamily: "readexPro",
+  fontFamily: "system",
 
   // Timeline
   minimalLayout: "on",
   timelineWidth: "700",
-  timelineBorders: "show",
+  timelineBorders: "hide",
   tweetBorders: "show",
   stickyHeader: "on",
   timelineTabs: "show",
@@ -26,19 +25,20 @@ const XM_DEFAULTS = {
   navLabels: "always",
   navCenter: "off",
   unreadBadge: "show",
+  compactNav: "on",
   grokDrawer: "hide",
   navLogo: "show",
   navHome: "show",
   navExplore: "show",
   navNotifications: "show",
   navMessages: "show",
-  navGrok: "show",
-  navHistory: "show",
-  navCreatorStudio: "show",
+  navGrok: "hide",
+  navHistory: "hide",
+  navCreatorStudio: "hide",
   navPremium: "hide",
   navBookmarks: "show",
-  navLists: "show",
-  navCommunities: "show",
+  navLists: "hide",
+  navCommunities: "hide",
   navJobs: "hide",
   navArticles: "hide",
   navVerifiedOrgs: "hide",

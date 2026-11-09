@@ -5,7 +5,7 @@ const ON = ["on", "off"];
 
 const SECTIONS = [
   ["Typeface", [
-    ["fontFamily", "Font", "select", [["readexPro", "Readex Pro"], ["calibri", "Calibri (installed)"], ["convection", "Convection (installed)"]]],
+    ["fontFamily", "Font", "select", [["system", "System"], ["readexPro", "Readex Pro"], ["calibri", "Calibri (installed)"], ["convection", "Convection (installed)"]]],
   ]],
   ["Timeline", [
     ["minimalLayout", "Minimal layout", "toggle", ON],
@@ -28,6 +28,7 @@ const SECTIONS = [
   ]],
   ["Navigation", [
     ["navLabels", "Labels", "choice", [["never", "Never"], ["hover", "Hover"], ["always", "Always"]]],
+    ["compactNav", "Compact text navigation (labels: Always)", "toggle", ON],
     ["navCenter", "Center vertically", "toggle", ON],
     ["unreadBadge", "Unread badges", "toggle", SHOW],
     ["grokDrawer", "Grok drawer", "toggle", SHOW],
@@ -61,7 +62,7 @@ const SECTIONS = [
 const container = document.getElementById("controls");
 
 function save(key, value) {
-  chrome.storage.sync.set({ [key]: value });
+  chrome.storage.local.set({ [key]: value });
 }
 
 function toggle(key, label, [onValue, offValue], value) {
@@ -131,7 +132,7 @@ function customCss(value) {
   return section;
 }
 
-chrome.storage.sync.get(XM_DEFAULTS, (settings) => {
+chrome.storage.local.get(XM_DEFAULTS, (settings) => {
   for (const [title, controls] of SECTIONS) {
     // The long list of sidebar links starts folded.
     const folded = title === "Sidebar links";
@@ -148,7 +149,7 @@ chrome.storage.sync.get(XM_DEFAULTS, (settings) => {
     if (title === "Typeface") {
       const hint = document.createElement("p");
       hint.className = "font-help";
-      hint.textContent = "Calibri and Convection use installed fonts. Readex Pro is the bundled fallback.";
+      hint.textContent = "System uses your device font. Calibri and Convection require installation; Readex Pro is bundled.";
       section.append(hint);
     }
   }
@@ -167,7 +168,7 @@ chrome.storage.sync.get(XM_DEFAULTS, (settings) => {
   reset.className = "reset";
   reset.textContent = "Reset to defaults";
   reset.addEventListener("click", () => {
-    chrome.storage.sync.clear(() => location.reload());
+    chrome.storage.local.clear(() => location.reload());
   });
   container.append(reset);
 });

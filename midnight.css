@@ -1,19 +1,18 @@
 :root {
   color-scheme: dark !important;
-  --mmx-base: #121a30;
-  --mmx-raised: #1b2540;
-  --mmx-glow: #242e4d;
-  --mmx-text: #d9e3e6;
-  --mmx-muted: #a9b8c6;
-  --mmx-line: #34425c;
-  --mmx-hover: #2b3753;
-  --mmx-accent: #af904d;
-  --mmx-accent-hover: #c9ad71;
-  --mmx-on-accent: #121a30;
-  --mmx-link: #89a6d4;
-  --mmx-like: #d79583;
-  --mmx-repost: #78b5ad;
-  --mmx-font: var(--xm-font-family, "Readex Pro", sans-serif);
+  --mmx-base: #000000;
+  --mmx-raised: #181818;
+  --mmx-text: #e7e7e7;
+  --mmx-muted: #a0a0a0;
+  --mmx-line: #303030;
+  --mmx-hover: #252525;
+  --mmx-accent: #e7e7e7;
+  --mmx-accent-hover: #ffffff;
+  --mmx-on-accent: #101010;
+  --mmx-link: #a8b9d6;
+  --mmx-like: #e3837e;
+  --mmx-repost: #85b9a4;
+  --mmx-font: var(--xm-font-family, system-ui, sans-serif);
 }
 
 html, body, #react-root, #react-root > div,
@@ -27,10 +26,6 @@ html, body, #react-root, #react-root > div,
   color: var(--mmx-text) !important;
 }
 
-body {
-  background-image: radial-gradient(ellipse 95% 75% at 14% -8%, var(--mmx-glow), transparent 78%) !important;
-  background-attachment: fixed !important;
-}
 
 body, body *:not(svg):not(path):not(video):not(canvas) {
   font-family: var(--mmx-font) !important;
@@ -49,10 +44,9 @@ body, body *:not(svg):not(path):not(video):not(canvas) {
   background-color: var(--mmx-base) !important;
 }
 
-/* The timeline header uses a translucent white class rather than a solid
-   surface. Keep its translucency, with a Midnight tint. */
+/* Keep the timeline header translucent against the black background. */
 [data-testid="primaryColumn"] [class~="r-1e5uvyk"] {
-  background-color: rgb(18 26 48 / 92%) !important;
+  background-color: rgb(0 0 0 / 92%) !important;
 }
 
 nav a,
@@ -137,8 +131,7 @@ a[href^="/search?"] {
   color: var(--mmx-on-accent);
 }
 
-/* X accent colors. X blue becomes Midnight slate blue, likes become coral,
-   reposts become teal. Only the compose Post button takes the gold fill. */
+/* Keep links and reaction states distinct while using a neutral Post button. */
 [style*="color: rgb(29, 155, 240)"],
 [data-testid="icon-verified"] {
   color: var(--mmx-link) !important;
@@ -176,8 +169,7 @@ a[href^="/search?"] {
   background-color: rgb(120 181 173 / 14%) !important;
 }
 
-/* Light-filled buttons such as Follow. Keep them filled, with navy text,
-   so they do not turn into light text on a light fill. */
+/* Keep light-filled buttons readable with dark text. */
 [style*="background-color: rgb(239, 243, 244)"],
 [style*="background-color: rgb(15, 20, 25)"] {
   background-color: var(--mmx-text) !important;
@@ -273,7 +265,7 @@ a[href^="/search?"] {
   color: var(--mmx-on-accent) !important;
 }
 
-/* Disabled Post button: a quiet raised navy, not half-transparent gold. */
+/* Disabled Post button: a quiet raised surface. */
 [data-testid="tweetButtonInline"][disabled],
 [data-testid="tweetButtonInline"][aria-disabled="true"],
 [data-testid="tweetButton"][disabled],
@@ -306,8 +298,7 @@ a[href^="/search?"] {
   background-color: var(--mmx-hover) !important;
 }
 
-/* Filled slate-blue pills and badges (new posts pill, unread counts) carry
-   white text in X. White on slate fails contrast, so use navy. */
+/* Filled pills and badges need dark text on the light accent. */
 .r-l5o3uw,
 .r-l5o3uw *,
 [data-testid="pillLabel"],
@@ -365,8 +356,7 @@ header[role="banner"] nav a svg + div[aria-label] {
   color: var(--mmx-accent-hover) !important;
 }
 
-/* The volume track uses X's white media controls, which the general surface
-   rule above would otherwise turn navy. Keep this control gold. */
+/* Keep the volume control distinct from the surrounding media. */
 [data-testid="videoComponent"] :is([aria-label="Mute"], [aria-label="Unmute"]),
 [data-testid="videoComponent"] :is([aria-label="Mute"], [aria-label="Unmute"]) svg {
   color: var(--mmx-accent-hover) !important;

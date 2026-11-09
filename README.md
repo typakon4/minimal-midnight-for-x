@@ -1,54 +1,35 @@
-# Minimal Midnight For X (twitter)
+# X Minimal Focus
 
-An independent, open-source Chrome extension that gives x.com a quiet Midnight palette and optional layout controls. Choose Readex Pro, Calibri, or Convection in the extension popup. Readex Pro is bundled and works offline. Calibri and Convection use fonts already installed on your device; if either is absent, the page falls back to Readex Pro.
+Локальный форк [Minimal Midnight for X](https://github.com/saiafgamal/minimal-midnight-for-x), адаптированный под чёрный минималистичный интерфейс с компактным текстовым меню. Это оформление обычного X, а не отдельный клиент и не точная копия интерфейса из видео.
 
-This project is not affiliated with X, Google, or Typefully. It includes no proprietary font files.
+- Чёрный фон, системный шрифт и лента шириной 700 px по умолчанию.
+- Текстовое меню, скрытая правая колонка и настраиваемые пункты навигации.
+- Штатные кнопки X остаются доступными; настройки и режим автора — в меню расширения.
+- Компактное меню включается на экранах от 1000 px при настройке **Labels: Always**. Его можно отключить переключателем **Compact text navigation**.
 
-## Screenshots
-
-These are signed-in X screenshots captured with the local extension. The account owner's username is excluded or redacted. The public extension uses the same colors and layout; its available fonts differ as described above.
-
-### Home feed
-
-![Midnight Home feed with account switcher redacted](docs/images/home-feed-redacted.png)
-
-### Home sidebar
-
-![Midnight navigation on X Home](docs/images/home-sidebar.png)
-
-### Complete posts
-
-[OpenAI post](https://x.com/OpenAI/status/2100679996633452747) · English
-
-![Complete English post by OpenAI](docs/images/openai-en.png)
-
-[Salla post](https://x.com/SallaApp/status/2099087474400084290) · Arabic
-
-![Complete Arabic post by Salla](docs/images/salla-ar.png)
-
-### Bookmark confirmation
-
-![Added to your Bookmarks message on a Midnight-themed post](docs/images/bookmark-confirmation.png)
+Исходная основа: коммит `7a2b9c5eb4ff01c6b04bf66090eee1bfc9f00d85`. Форк не связан с X, Google или Typefully.
 
 ## Install from source
 
-1. Open `chrome://extensions` in Chrome and enable **Developer mode**.
-2. Click **Load unpacked** and select this repository's root folder.
-3. Reload any open x.com tabs.
-4. Open the extension popup to choose a font and adjust the layout.
+1. Открой `chrome://extensions` в Chrome или `edge://extensions` в Edge.
+2. Включи **Режим разработчика / Developer mode**.
+3. Нажми **Загрузить распакованное / Load unpacked** и выбери корень этого репозитория.
+4. Обнови открытую вкладку X. Настройки доступны по значку **X Minimal Focus**.
 
-The extension runs only on `x.com` and `www.x.com`. Its only requested permission is `storage`, used for preferences. It does not collect posts, messages, account details, or browsing history for the developer. See [Privacy](PRIVACY.md) for the exact storage behavior.
+Для отключения выключи или удали расширение на той же странице и обнови X. Если установлена другая тема X, отключи её, чтобы избежать конфликта стилей.
 
-If you also use another X styling extension, disable one of them to avoid conflicting styles.
+Расширение работает на `x.com` и `www.x.com`, запрашивает `storage` и применяет стили и скрипты к страницам X. Настройки сохраняются локально в хранилище расширения, а не в хранилище сайта или Chrome Sync. Браузер может предупредить, что расширение способно читать и изменять данные на X. Подробности — в [PRIVACY.md](PRIVACY.md).
+
+По умолчанию в коде расширения нет автолайков, автопубликаций и собственных сетевых запросов; сайт X продолжает отправлять свои запросы. Добавленный пользователем CSS с внешними URL может вызвать загрузку ресурсов. Отсутствие детекта или ограничений не гарантируется: страница может наблюдать изменения DOM и оформления. Разметка X может измениться и сломать селекторы. Локальный макет проверен в Chromium; реальный аккаунт X пока не проверен.
 
 ## Fonts and licenses
 
-Readex Pro is from the [Google Fonts repository](https://github.com/google/fonts/tree/main/ofl/readexpro) under the SIL Open Font License 1.1, included in [`licenses/ReadexPro-OFL.txt`](licenses/ReadexPro-OFL.txt). Calibri and Convection are not included or redistributed. The layout work includes adaptations of [Minimal Theme for Twitter / X](https://github.com/typefully/minimal-twitter), which is MIT licensed; its notice is preserved in [`licenses/Minimal-Theme-MIT.txt`](licenses/Minimal-Theme-MIT.txt). See [third-party notices](THIRD_PARTY_NOTICES.md).
+Системный шрифт выбран по умолчанию. Readex Pro входит в комплект под SIL Open Font License 1.1; текст лицензии — [`licenses/ReadexPro-OFL.txt`](licenses/ReadexPro-OFL.txt). Calibri и Convection используются только при наличии на устройстве. Основа содержит изменения [Minimal Theme for Twitter / X](https://github.com/typefully/minimal-twitter) под MIT; уведомление сохранено в [`licenses/Minimal-Theme-MIT.txt`](licenses/Minimal-Theme-MIT.txt). Подробности — [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 The original code in this repository is licensed under MIT. Third-party fonts and code retain their own licenses.
 
 ## Development
 
-This extension uses Manifest V3 and has no build step. After editing source files, click **Reload** on its card at `chrome://extensions`, then reload x.com. Keep `manifest.json` at the root of the extension folder.
+Расширение использует Manifest V3 и не требует сборки. После изменений нажми **Reload** на карточке расширения и обнови X.
 
-X changes its markup frequently. If a selector stops matching, open an issue with the affected page and a screenshot that contains no private information.
+Самопроверка переходов настроек и изоляции хранилища: `node test-settings.cjs`.

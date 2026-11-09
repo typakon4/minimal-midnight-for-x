@@ -3,6 +3,7 @@
 const root = document.documentElement;
 let settings = { ...XM_DEFAULTS };
 const FONT_FAMILIES = {
+  system: 'system-ui, -apple-system, "Segoe UI", sans-serif',
   readexPro: '"Readex Pro", sans-serif',
   calibri: 'Calibri, "Readex Pro", sans-serif',
   convection: 'Convection, "Readex Pro", sans-serif',
@@ -16,7 +17,7 @@ function apply() {
     root.setAttribute(`data-xm-${kebab(key)}`, value);
   }
   root.style.setProperty("--xm-timeline-width", `${settings.timelineWidth}px`);
-  root.style.setProperty("--xm-font-family", FONT_FAMILIES[settings.fontFamily] || FONT_FAMILIES.readexPro);
+  root.style.setProperty("--xm-font-family", FONT_FAMILIES[settings.fontFamily] || FONT_FAMILIES.system);
   applyCustomCss();
   cleanTitle();
 }
@@ -46,7 +47,7 @@ function cleanTitle() {
 }
 
 function setWriterMode(value) {
-  chrome.storage.sync.set({ writerMode: value });
+  chrome.storage.local.set({ writerMode: value });
 }
 
 // A writer mode button at the end of the composer toolbar.
@@ -68,33 +69,20 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && settings.writerMode === "on") setWriterMode("off");
 });
 
-// chrome.storage answers after X starts painting. Apply the last known
-// settings from a local copy first, so the layout does not flash.
-const CACHE_KEY = "sifr-midnight-settings";
-try {
-  settings = { ...XM_DEFAULTS, ...JSON.parse(localStorage.getItem(CACHE_KEY) || "{}") };
-} catch {}
+// Apply defaults immediately, then load this extension's local preferences.
 apply();
 
-function cache() {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(settings));
-  } catch {}
-}
-
-chrome.storage.sync.get(XM_DEFAULTS, (stored) => {
+chrome.storage.local.get(XM_DEFAULTS, (stored) => {
   settings = stored;
   apply();
-  cache();
 });
 
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area !== "sync") return;
+  if (area !== "local") return;
   for (const [key, { newValue }] of Object.entries(changes)) {
     settings[key] = newValue ?? XM_DEFAULTS[key];
   }
   apply();
-  cache();
 });
 
 // X mutates the DOM constantly. Run the checks at most once per frame.

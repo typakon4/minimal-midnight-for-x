@@ -4,8 +4,7 @@
 
 /* ---------- Timeline ---------- */
 
-/* Minimal layout: timeline beside the navigation, no right sidebar, floating Post button,
-   no messages drawer. */
+/* Minimal layout: timeline beside the navigation, no right sidebar or messages drawer. */
 html[data-xm-minimal-layout="on"] [data-testid="DMDrawer"],
 html[data-xm-minimal-layout="on"] [data-testid="chat-drawer-root"] {
   visibility: hidden !important;
@@ -47,6 +46,50 @@ html[data-xm-minimal-layout="on"] [data-testid="chat-drawer-root"] {
     right: 16px !important;
     bottom: 24px !important;
     box-shadow: 0 8px 24px rgb(0 0 0 / 35%) !important;
+  }
+
+  /* Keep the compact text menu and compose action usable without the icons. */
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"],
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] > div {
+    width: 230px !important;
+    flex-basis: 230px !important;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] nav[role="navigation"] > * > div {
+    min-height: 32px !important;
+    padding: 4px 10px !important;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] nav[role="navigation"] > * svg {
+    display: none !important;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] nav[role="navigation"] > * > div > div + div:last-child {
+    display: block !important;
+    margin: 0 !important;
+    text-transform: lowercase;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] nav[role="navigation"] > * > div > div + div:last-child,
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] header[role="banner"] nav[role="navigation"] > * > div > div + div:last-child span {
+    color: var(--mmx-muted) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] [data-testid="SideNav_NewTweet_Button"] {
+    position: static !important;
+    width: fit-content !important;
+    min-height: 32px !important;
+    margin: 12px 10px !important;
+    padding: 4px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-transform: lowercase;
+  }
+
+  html[data-xm-minimal-layout="on"][data-xm-compact-nav="on"][data-xm-nav-labels="always"] [data-testid="SideNav_NewTweet_Button"] * {
+    color: var(--mmx-text) !important;
   }
 
   html[data-xm-minimal-layout="on"]:not([data-xm-page="search"]) [data-testid="sidebarColumn"] {

@@ -1,20 +1,15 @@
-@font-face {
-  font-family: "Readex Pro";
-  src: url("fonts/ReadexPro-HEXP-wght.ttf") format("truetype");
-  font-weight: 100 900;
-}
 
 :root {
   color-scheme: dark;
-  --mmx-base: #121a30;
-  --mmx-raised: #1b2540;
-  --mmx-text: #d9e3e6;
-  --mmx-muted: #a9b8c6;
-  --mmx-line: #34425c;
-  --mmx-hover: #2b3753;
-  --mmx-accent: #af904d;
-  --mmx-on-accent: #121a30;
-  --mmx-link: #89a6d4;
+  --mmx-base: #080808;
+  --mmx-raised: #181818;
+  --mmx-text: #e7e7e7;
+  --mmx-muted: #a0a0a0;
+  --mmx-line: #303030;
+  --mmx-hover: #252525;
+  --mmx-accent: #e7e7e7;
+  --mmx-on-accent: #101010;
+  --mmx-link: #a8b9d6;
 }
 
 * {
@@ -27,7 +22,7 @@ body {
   padding: 18px 16px 16px;
   background: var(--mmx-base);
   color: var(--mmx-text);
-  font: 14px/1.4 "Readex Pro", sans-serif;
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 header {

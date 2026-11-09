@@ -1,11 +1,9 @@
 # Privacy
 
-Minimal Midnight For X (twitter) changes the appearance of x.com. It does not send your X posts, messages, account details, browsing history, or settings to the developer. It has no analytics, advertising, or developer-operated server.
+X Minimal Focus изменяет внешний вид x.com и выполняет локальные скрипты на его страницах. Скрипты читают структуру страницы, изменяют DOM и добавляют кнопку режима автора. По исходному коду расширение не собирает и не отправляет разработчику посты, сообщения, сведения об аккаунте или историю просмотра.
 
-The extension uses Chrome's `storage.sync` to save appearance preferences, including any custom CSS you enter. Chrome may synchronize those preferences through your Google account according to your Chrome sync settings. To reduce a flash of the default layout while x.com loads, the extension also caches those same preferences in x.com's local storage on your device. The extension reads the current page structure to apply its appearance and layout options; it does not save or transmit post content.
+Параметры, в том числе пользовательский CSS, сохраняются в `chrome.storage.local` расширения на устройстве. Форк не использует `chrome.storage.sync` и не кеширует настройки в `localStorage` сайта X. **Reset to defaults** сбрасывает настройки; удаление расширения удаляет и его хранилище.
 
-Readex Pro is bundled in the extension. Calibri and Convection are used only when already installed on your device. Choosing a font does not contact Google Fonts. Custom CSS is entirely user supplied; if you add remote URLs to your CSS, the browser may request those resources.
+Readex Pro включён в комплект; Calibri и Convection используются только при наличии на устройстве. Сами варианты шрифтов не загружаются из Google Fonts. Если пользователь добавит внешние URL в свой CSS, браузер может запросить эти ресурсы.
 
-You can delete synchronized preferences with **Reset to defaults** in the popup. Uninstalling the extension removes its Chrome extension storage. To clear the x.com cache, clear x.com's site data in Chrome.
-
-This policy describes the source in this repository. Changes to data handling will be disclosed here before a release.
+Доступ к страницам X нужен для оформления, поэтому браузер может предупредить о возможности чтения и изменения данных сайта. X может наблюдать изменения DOM или внешнего вида; этот форк не обещает отсутствие детекта или ограничений.
